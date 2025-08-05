@@ -1,3 +1,5 @@
+import reposi.ProdutoRepository;
+import cadastrarproduto.Produto;
 import ch.qos.logback.classic.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,9 @@ public class ProdutoService{
     public Produto cadastrarProduto(Produto produto){
         Produto produtoSalvo = produtoRepository.save(produto);
         if (produtoSalvo.getPreco()>1000.00){
-            logger.info("Produto de luxo cadastrado: ID{}",produtoSalvo.getId());
+            logger.info("cadastrarproduto.Produto de luxo cadastrado: ID{}",produtoSalvo.getId());
         }else{
-            logger.info("Produto cadastrado:ID{}",produtoSalvo.getId());
+            logger.info("cadastrarproduto.Produto cadastrado:ID{}",produtoSalvo.getId());
         }
         return  produtoSalvo;
     }
