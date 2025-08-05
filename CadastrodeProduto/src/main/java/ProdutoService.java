@@ -1,3 +1,5 @@
+import ch.qos.logback.classic.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -5,16 +7,19 @@ import org.springframework.stereotype.Service;
 public class ProdutoService{
     @Autowired
     private ProdutoRepository produtoRepository;
+    private static final Logger logger = (Logger) LoggerFactory.getLogger(ProdutoService.class);
 
-    public  String cadastrarProduto(Produto produto){
-        if (produto.getPreco()> 1000.00){
-            produtoRepository.save(produto);
-            return "Produto de luxo cadastrado com sucesso";
+    public ProdutoService(ProdutoRepository produtoRepository){
+        this.produtoRepository = produtoRepository;
+    }
+    public Produto cadastrarProduto(Produto produto){
+        Produto produtoSalvo = produtoRepository.save(produto);
+        if (produtoSalvo.getPreco()>1000.00){
+            logger.info("Produto de luxo cadastrado: ID{}",produtoSalvo.getId());
         }else{
-            produtoRepository.save(produto);
-            return "Produto cadastrado com sucesso!";
+            logger.info("Produto cadastrado:ID{}",produtoSalvo.getId());
         }
-
+        return  produtoSalvo;
     }
 
 }

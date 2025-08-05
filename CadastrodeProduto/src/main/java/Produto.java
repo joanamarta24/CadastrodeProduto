@@ -4,19 +4,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NonNull;
+import org.antlr.v4.runtime.misc.NotNull;
 
-@NonNull (message ="Nome do produto é obrigatorio")
 @Data
- @Entity
+@Entity
 public class Produto {
  @Id
-  @GeneratedValue(Strategy= GenerationType.IDENTITY)
-  private Long id;
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+ private Long id;
 
-   private String nome;
-   private double preco;
-   private boolean emEstoque;
-   private String cadastrarProduto;
+ @NotNull(message = "Nome do produto é obrigatório")
+ private String nome;
+
+ private double preco;
+ private boolean emEstoque;
 
 }
 
